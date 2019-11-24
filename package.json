@@ -2,9 +2,14 @@
   "name": "@herteleo/final-countdown",
   "version": "0.0.0-development",
   "description": "A simple and framework agnostic countdown library",
-  "main": "index.js",
+  "main": "dist/final-countdown.common.js",
+  "module": "dist/final-countdown.esm.js",
+  "unpkg": "dist/final-countdown.umd.min.js",
+  "jsdelivr": "dist/final-countdown.umd.min.js",
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "build": "rollup --config .rolluprc.js",
+    "serve": "rollup --config .rolluprc.js --watch"
   },
   "repository": {
     "type": "git",
@@ -18,8 +23,11 @@
   },
   "homepage": "https://github.com/herteleo/final-countdown#readme",
   "devDependencies": {
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
+    "@rollup/plugin-replace": "^2.2.1",
     "@semantic-release/changelog": "^3.0.6",
     "@semantic-release/git": "^7.0.18",
     "eslint": "^6.1.0",
@@ -30,6 +38,10 @@
     "eslint-plugin-react-hooks": "^1.7.0",
     "husky": "^3.1.0",
     "lint-staged": "^9.4.3",
+    "rollup": "^1.27.4",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-uglify": "^6.0.3",
     "semantic-release": "^15.13.31"
   },
   "husky": {
