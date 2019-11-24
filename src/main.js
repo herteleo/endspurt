@@ -1,7 +1,7 @@
 import calculatePeriod from './utils/calculatePeriod';
 import convertValueToDate from './utils/convertValueToDate';
 
-class FinalCountdown {
+export default class {
   constructor(value, options = {}) {
     this.setOptions(options);
 
@@ -116,5 +116,3 @@ class FinalCountdown {
     this.events[event].forEach((task) => task.call(this, this.distance));
   }
 }
-
-export default FinalCountdown;
