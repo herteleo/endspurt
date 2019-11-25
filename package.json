@@ -1,6 +1,6 @@
 {
   "name": "endspurt",
-  "version": "0.0.0-development",
+  "version": "0.1.0",
   "description": "A simple and framework agnostic countdown library",
   "main": "dist/endspurt.common.js",
   "module": "dist/endspurt.esm.js",
