@@ -5,5 +5,6 @@ export default {
   hour: Date.UTC(70, 0, 1, 1, 0, 0, 0),
   day: Date.UTC(70, 0, 2, 0, 0, 0, 0),
   week: Date.UTC(70, 0, 8, 0, 0, 0, 0),
+  month: Date.UTC(71, 0, 1, 0, 0, 0, 0) / 12,
   year: Date.UTC(71, 0, 1, 0, 0, 0, 0),
 };

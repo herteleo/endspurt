@@ -3,10 +3,9 @@ import convertValueToDate from './utils/convertValueToDate';
 
 export default class {
   constructor(value, options = {}) {
-    this.setOptions(options);
-
     this.distance = {
       years: { value: null, padded: null, raw: null },
+      months: { value: null, padded: null, raw: null },
       weeks: { value: null, padded: null, raw: null },
       days: { value: null, padded: null, raw: null },
       hours: { value: null, padded: null, raw: null },
@@ -23,6 +22,8 @@ export default class {
       terminated: [],
       updated: [],
     };
+
+    this.setOptions(options);
 
     try {
       this.countdownToDate = convertValueToDate(value);
@@ -45,10 +46,9 @@ export default class {
       return defaultVal;
     };
 
-    const defaultIncludes = ['years', 'weeks', 'days', 'hours', 'minutes', 'seconds', 'milliseconds'];
-
     this.options = {
       yearsPad: hasOptionElse('yearsPad', 1),
+      monthsPad: hasOptionElse('monthsPad', 2),
       weeksPad: hasOptionElse('weeksPad', 2),
       daysPad: hasOptionElse('daysPad', 2),
       hoursPad: hasOptionElse('hoursPad', 2),
@@ -57,7 +57,8 @@ export default class {
       millisecondsPad: hasOptionElse('millisecondsPad', 4),
       timezoneOffset: hasOptionElse('timezoneOffset', 0),
       terminate: hasOptionElse('terminate', true),
-      include: hasOptionElse('include', defaultIncludes),
+      include: hasOptionElse('include', Object.keys(this.distance)),
+      interval: hasOptionElse('interval', 200),
     };
   }
 
@@ -96,8 +97,12 @@ export default class {
 
   start() {
     if (!this.initialized) return;
+    this.interval();
 
-    this.timer = setInterval(() => this.interval.call(this), 200);
+    this.timer = setInterval(() => {
+      this.interval();
+    }, this.options.interval);
+
     this.trigger('started');
   }
 

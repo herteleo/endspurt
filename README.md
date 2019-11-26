@@ -1,20 +1,18 @@
-# Endspurt - Full featured countdown library
+# Endspurt: A feature-rich countdown library
 
 
 ![](https://img.shields.io/npm/v/endspurt/latest)
+![](https://img.shields.io/snyk/vulnerabilities/npm/endspurt)
 ![](https://github.com/herteleo/endspurt/workflows/Release/badge.svg)
 ![](https://github.com/herteleo/endspurt/workflows/Lint/badge.svg)
 
 
 ## Installation
 
-**Via CDN**
+**Via a CDN**
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/endspurt"></script>
-```
-
-```html
 <script src="https://unpkg.com/endspurt"></script>
 ```
 
@@ -32,15 +30,12 @@ import Endspurt from 'endspurt';
 ## Basic usage
 
 ```js
-const myCountdown = new Endspurt('YYYY-MM-DDT00:00:00');
+const options = { include: ['hours', 'minutes', 'seconds'] };
+const myCountdown = new Endspurt('YYYY-MM-DDT00:00:00', options);
 
 myCountdown.on('updated', (distance) => {
-  console.log(distance.years.value);
-  console.log(distance.weeks.value);
-  console.log(distance.days.value);
-  console.log(distance.hours.value);
-  console.log(distance.minutes.value);
-  console.log(distance.seconds.value);
+  const { hours, minutes, seconds } = distance;
+  console.log(`${hours.value} hours, ${minutes.padded} minutes and ${seconds.padded} seconds remaining.`);
 });
 
 myCountdown.on('finished', () => {
@@ -53,28 +48,28 @@ myCountdown.start();
 
 ## API
 
-```js
-new Endspurt(value, options);
-```
-- `value` can be of type
-  - `new Date()`
-  - Timestamp as `Number`
-  - Timestamp as `String`
-  - `'YYYY-MM-DD'`
-  - `'YYYY-MM-DDT00:00:00'`
-  - ```js
-    {
-      year: 'YYYY',
-      month: 'MM',
-      day: 'DD',
-      hour: 'HH',   // optional, default: '00'
-      minute: 'II', // optional, default: '00'
-      second: 'SS', // optional, default: '00'
-    }
-    ```
-- `options` can be of type
-  - `Object`
-  - [Go to options](#options)
+### `new Endspurt(value, options)`
+
+#### `value`: required
+Allowed formats:
+- `new Date()`
+- Timestamp as `Number`
+- Timestamp as `String`
+- `'YYYY-MM-DD'`
+- `'YYYY-MM-DDT00:00:00'`
+- ```js
+  {
+    year: 'YYYY',
+    month: 'MM',
+    day: 'DD',
+    hour: 'HH',   // optional, default: '00'
+    minute: 'II', // optional, default: '00'
+    second: 'SS', // optional, default: '00'
+  }
+  ```
+
+#### `options`: optional
+Defined as `Object`. [See options reference](#options)
 
 
 ### Methods
@@ -108,10 +103,11 @@ myCountdown.on('updated', function (distance) {
 });
 ```
 
-**Output**
+**Example output**
 ```js
 {
   years: { value: 1, padded: '01', raw: 1 },
+  months: { value: 1, padded: '01', raw: 1 },
   weeks: { value: 2, padded: '02', raw: 2 },
   days: { value: 6, padded: '06', raw: 6 },
   hours: { value: 2, padded: '02', raw: 2 },
@@ -124,15 +120,22 @@ myCountdown.on('updated', function (distance) {
 
 ## Options
 
-| Option          | Format  | Default value                                                               | Description
-|-----------------|---------|-----------------------------------------------------------------------------|------------
-| terminate       | Boolean | `true`                                                                      | Stop interval if countdown has finished
-| include         | Array   | `['years', 'weeks', 'days', 'hours', 'minutes', 'seconds', 'milliseconds']` | Include defined periods in calculation
-| timezoneOffset  | Number  | `0`                                                                         | Manual timezone offset in milliseconds
-| yearsPad        | Number  | `1`                                                                         | Number of leading zeros for `distance.years.padded` output
-| weeksPad        | Number  | `2`                                                                         | Number of leading zeros for `distance.weeks.padded` output
-| daysPad         | Number  | `2`                                                                         | Number of leading zeros for `distance.days.padded` output
-| hoursPad        | Number  | `2`                                                                         | Number of leading zeros for `distance.hours.padded` output
-| minutesPad      | Number  | `2`                                                                         | Number of leading zeros for `distance.minutes.padded` output
-| secondsPad      | Number  | `2`                                                                         | Number of leading zeros for `distance.seconds.padded` output
-| millisecondsPad | Number  | `4`                                                                         | Number of leading zeros for `distance.milliseconds.padded` output
+| Option          | Format  | Default value                             | Description
+|-----------------|---------|------------------------------------------:|------------
+| include         | Array   | [*See below*](#default-value-for-include) | Include defined periods in calculation
+| interval        | Number  | `200`                                     | Define (in milliseconds) at which interval the `updated`-event should be called
+| terminate       | Boolean | `true`                                    | Stop interval if countdown has finished
+| timezoneOffset  | Number  | `0`                                       | Manual timezone offset in milliseconds
+| yearsPad        | Number  | `1`                                       | Number of leading zeros for `distance.years.padded` output
+| monthsPad       | Number  | `2`                                       | Number of leading zeros for `distance.months.padded` output
+| weeksPad        | Number  | `2`                                       | Number of leading zeros for `distance.weeks.padded` output
+| daysPad         | Number  | `2`                                       | Number of leading zeros for `distance.days.padded` output
+| hoursPad        | Number  | `2`                                       | Number of leading zeros for `distance.hours.padded` output
+| minutesPad      | Number  | `2`                                       | Number of leading zeros for `distance.minutes.padded` output
+| secondsPad      | Number  | `2`                                       | Number of leading zeros for `distance.seconds.padded` output
+| millisecondsPad | Number  | `4`                                       | Number of leading zeros for `distance.milliseconds.padded` output
+
+### Default value for `include`
+```js
+['years', 'weeks', 'days', 'hours', 'minutes', 'seconds', 'milliseconds']
+```
