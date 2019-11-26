@@ -2,6 +2,7 @@
 
 
 ![](https://img.shields.io/npm/v/endspurt/latest)
+![](https://img.shields.io/snyk/vulnerabilities/npm/endspurt)
 ![](https://github.com/herteleo/endspurt/workflows/Release/badge.svg)
 ![](https://github.com/herteleo/endspurt/workflows/Lint/badge.svg)
 
