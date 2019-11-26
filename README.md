@@ -128,6 +128,7 @@ myCountdown.on('updated', function (distance) {
 |-----------------|---------|-----------------------------------------------------------------------------|------------
 | terminate       | Boolean | `true`                                                                      | Stop interval if countdown has finished
 | include         | Array   | `['years', 'weeks', 'days', 'hours', 'minutes', 'seconds', 'milliseconds']` | Include defined periods in calculation
+| interval        | Number  | `200`                                                                       | Define (in milliseconds) how often the `updated`-event should get called
 | timezoneOffset  | Number  | `0`                                                                         | Manual timezone offset in milliseconds
 | yearsPad        | Number  | `1`                                                                         | Number of leading zeros for `distance.years.padded` output
 | weeksPad        | Number  | `2`                                                                         | Number of leading zeros for `distance.weeks.padded` output
