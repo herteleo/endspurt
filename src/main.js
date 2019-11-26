@@ -58,6 +58,7 @@ export default class {
       timezoneOffset: hasOptionElse('timezoneOffset', 0),
       terminate: hasOptionElse('terminate', true),
       include: hasOptionElse('include', defaultIncludes),
+      interval: hasOptionElse('interval', 200),
     };
   }
 
@@ -97,7 +98,10 @@ export default class {
   start() {
     if (!this.initialized) return;
 
-    this.timer = setInterval(() => this.interval.call(this), 200);
+    this.timer = setInterval(() => {
+      this.interval.call(this);
+    }, this.options.interval);
+
     this.trigger('started');
   }
 
