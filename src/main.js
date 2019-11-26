@@ -7,6 +7,7 @@ export default class {
 
     this.distance = {
       years: { value: null, padded: null, raw: null },
+      months: { value: null, padded: null, raw: null },
       weeks: { value: null, padded: null, raw: null },
       days: { value: null, padded: null, raw: null },
       hours: { value: null, padded: null, raw: null },
@@ -45,10 +46,11 @@ export default class {
       return defaultVal;
     };
 
-    const defaultIncludes = ['years', 'weeks', 'days', 'hours', 'minutes', 'seconds', 'milliseconds'];
+    const defaultIncludes = ['years', 'months', 'weeks', 'days', 'hours', 'minutes', 'seconds', 'milliseconds'];
 
     this.options = {
       yearsPad: hasOptionElse('yearsPad', 1),
+      monthsPad: hasOptionElse('monthsPad', 2),
       weeksPad: hasOptionElse('weeksPad', 2),
       daysPad: hasOptionElse('daysPad', 2),
       hoursPad: hasOptionElse('hoursPad', 2),
