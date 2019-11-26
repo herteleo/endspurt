@@ -99,6 +99,7 @@ export default class {
 
   start() {
     if (!this.initialized) return;
+    this.interval();
 
     this.timer = setInterval(() => {
       this.interval.call(this);
