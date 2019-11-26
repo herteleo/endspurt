@@ -36,6 +36,7 @@ const myCountdown = new Endspurt('YYYY-MM-DDT00:00:00');
 
 myCountdown.on('updated', (distance) => {
   console.log(distance.years.value);
+  console.log(distance.months.value);
   console.log(distance.weeks.value);
   console.log(distance.days.value);
   console.log(distance.hours.value);
@@ -112,6 +113,7 @@ myCountdown.on('updated', function (distance) {
 ```js
 {
   years: { value: 1, padded: '01', raw: 1 },
+  months: { value: 1, padded: '01', raw: 1 },
   weeks: { value: 2, padded: '02', raw: 2 },
   days: { value: 6, padded: '06', raw: 6 },
   hours: { value: 2, padded: '02', raw: 2 },
@@ -131,6 +133,7 @@ myCountdown.on('updated', function (distance) {
 | interval        | Number  | `200`                                                                       | Define (in milliseconds) how often the `updated`-event should get called
 | timezoneOffset  | Number  | `0`                                                                         | Manual timezone offset in milliseconds
 | yearsPad        | Number  | `1`                                                                         | Number of leading zeros for `distance.years.padded` output
+| monthsPad       | Number  | `2`                                                                         | Number of leading zeros for `distance.months.padded` output
 | weeksPad        | Number  | `2`                                                                         | Number of leading zeros for `distance.weeks.padded` output
 | daysPad         | Number  | `2`                                                                         | Number of leading zeros for `distance.days.padded` output
 | hoursPad        | Number  | `2`                                                                         | Number of leading zeros for `distance.hours.padded` output
