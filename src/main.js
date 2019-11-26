@@ -102,7 +102,7 @@ export default class {
     this.interval();
 
     this.timer = setInterval(() => {
-      this.interval.call(this);
+      this.interval();
     }, this.options.interval);
 
     this.trigger('started');
