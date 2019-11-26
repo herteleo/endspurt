@@ -120,20 +120,20 @@ myCountdown.on('updated', function (distance) {
 
 ## Options
 
-| Option          | Format  | Default value  | Description
-|-----------------|---------|---------------:|------------
-| include         | Array   | *See below*    | Include defined periods in calculation
-| interval        | Number  | `200`          | Define (in milliseconds) at which interval the `updated`-event should be called
-| terminate       | Boolean | `true`         | Stop interval if countdown has finished
-| timezoneOffset  | Number  | `0`            | Manual timezone offset in milliseconds
-| yearsPad        | Number  | `1`            | Number of leading zeros for `distance.years.padded` output
-| monthsPad       | Number  | `2`            | Number of leading zeros for `distance.months.padded` output
-| weeksPad        | Number  | `2`            | Number of leading zeros for `distance.weeks.padded` output
-| daysPad         | Number  | `2`            | Number of leading zeros for `distance.days.padded` output
-| hoursPad        | Number  | `2`            | Number of leading zeros for `distance.hours.padded` output
-| minutesPad      | Number  | `2`            | Number of leading zeros for `distance.minutes.padded` output
-| secondsPad      | Number  | `2`            | Number of leading zeros for `distance.seconds.padded` output
-| millisecondsPad | Number  | `4`            | Number of leading zeros for `distance.milliseconds.padded` output
+| Option          | Format  | Default value                             | Description
+|-----------------|---------|------------------------------------------:|------------
+| include         | Array   | [*See below*](#default-value-for-include) | Include defined periods in calculation
+| interval        | Number  | `200`                                     | Define (in milliseconds) at which interval the `updated`-event should be called
+| terminate       | Boolean | `true`                                    | Stop interval if countdown has finished
+| timezoneOffset  | Number  | `0`                                       | Manual timezone offset in milliseconds
+| yearsPad        | Number  | `1`                                       | Number of leading zeros for `distance.years.padded` output
+| monthsPad       | Number  | `2`                                       | Number of leading zeros for `distance.months.padded` output
+| weeksPad        | Number  | `2`                                       | Number of leading zeros for `distance.weeks.padded` output
+| daysPad         | Number  | `2`                                       | Number of leading zeros for `distance.days.padded` output
+| hoursPad        | Number  | `2`                                       | Number of leading zeros for `distance.hours.padded` output
+| minutesPad      | Number  | `2`                                       | Number of leading zeros for `distance.minutes.padded` output
+| secondsPad      | Number  | `2`                                       | Number of leading zeros for `distance.seconds.padded` output
+| millisecondsPad | Number  | `4`                                       | Number of leading zeros for `distance.milliseconds.padded` output
 
 ### Default value for `include`
 ```js
