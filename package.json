@@ -1,8 +1,15 @@
 {
   "name": "endspurt",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A simple and framework agnostic countdown library",
-  "keywords": ["countdown", "clock", "date", "time", "timer", "timespan"],
+  "keywords": [
+    "countdown",
+    "clock",
+    "date",
+    "time",
+    "timer",
+    "timespan"
+  ],
   "license": "MIT",
   "author": "Leonard Hertel <leonard.hertel@gmail.com>",
   "homepage": "https://github.com/herteleo/endspurt#readme",
