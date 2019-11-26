@@ -6,6 +6,10 @@
   "module": "dist/endspurt.esm.js",
   "unpkg": "dist/endspurt.umd.min.js",
   "jsdelivr": "dist/endspurt.umd.min.js",
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
     "prepublishOnly": "npm run build",
     "lint": "eslint .",
