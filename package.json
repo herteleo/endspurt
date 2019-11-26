@@ -2,31 +2,43 @@
   "name": "endspurt",
   "version": "0.0.0-development",
   "description": "A simple and framework agnostic countdown library",
-  "main": "dist/endspurt.common.js",
-  "module": "dist/endspurt.esm.js",
-  "unpkg": "dist/endspurt.umd.min.js",
-  "jsdelivr": "dist/endspurt.umd.min.js",
+  "keywords": [],
+  "license": "MIT",
+  "author": "Leonard Hertel <leonard.hertel@gmail.com>",
+  "homepage": "https://github.com/herteleo/endspurt#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/herteleo/endspurt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/herteleo/endspurt/issues"
+  },
   "files": [
     "dist",
     "src"
   ],
+  "main": "dist/endspurt.common.js",
+  "module": "dist/endspurt.esm.js",
+  "unpkg": "dist/endspurt.umd.min.js",
+  "jsdelivr": "dist/endspurt.umd.min.js",
   "scripts": {
     "prepublishOnly": "npm run build",
     "lint": "eslint .",
     "build": "rollup --config .rolluprc.js",
     "serve": "rollup --config .rolluprc.js --watch"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/herteleo/endspurt.git"
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
   },
-  "keywords": [],
-  "author": "Leonard Hertel <leonard.hertel@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/herteleo/endspurt/issues"
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
   },
-  "homepage": "https://github.com/herteleo/endspurt#readme",
   "devDependencies": {
     "@babel/core": "^7.7.4",
     "@babel/preset-env": "^7.7.4",
@@ -48,17 +60,5 @@
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-uglify": "^6.0.3",
     "semantic-release": "^15.13.31"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "git add"
-    ]
   }
 }
