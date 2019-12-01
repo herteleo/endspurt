@@ -121,6 +121,8 @@ export default class {
     this.running = true;
     this.interval();
 
+    if (!this.running) return;
+
     this.timer = setInterval(() => {
       this.interval();
     }, this.options.interval);
