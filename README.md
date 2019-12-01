@@ -7,6 +7,9 @@
 ![](https://github.com/herteleo/endspurt/workflows/Lint/badge.svg)
 
 
+**⚠ Warning: Endspurt is still under development. There can still be breaking changes in 0.x.x-Verions. See the release notes for more information.**
+
+
 ## Installation
 
 **Via a CDN**
