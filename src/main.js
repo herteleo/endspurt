@@ -117,7 +117,7 @@ export default class {
   }
 
   start() {
-    if (!this.countdownToDate) return;
+    if (!this.countdownToDate || this.running) return;
     this.running = true;
     this.interval();
 
