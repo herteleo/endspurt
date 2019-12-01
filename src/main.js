@@ -3,6 +3,11 @@ import convertValueToDate from './utils/convertValueToDate';
 
 export default class {
   constructor(value, options = {}) {
+    this.initialized = false;
+    this.running = false;
+
+    this.countdownToDate = undefined;
+
     this.distance = {
       years: { value: null, padded: null, raw: null },
       months: { value: null, padded: null, raw: null },
@@ -25,15 +30,12 @@ export default class {
 
     this.setOptions(options);
 
-    try {
-      this.countdownToDate = convertValueToDate(value);
-      this.initialized = true;
-      this.trigger('initialized');
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(error);
-      this.initialized = false;
+    if (value) {
+      this.setEndDate(value);
     }
+
+    this.initialized = true;
+    this.trigger('initialized');
   }
 
   static get version() {
@@ -60,6 +62,20 @@ export default class {
       include: hasOptionElse('include', Object.keys(this.distance)),
       interval: hasOptionElse('interval', 200),
     };
+  }
+
+  setEndDate(value) {
+    try {
+      this.countdownToDate = convertValueToDate(value);
+
+      if (this.running) this.interval();
+    } catch (error) {
+      if (this.running) this.stop();
+
+      this.countdownToDate = undefined;
+      // eslint-disable-next-line no-console
+      console.error(error);
+    }
   }
 
   calculateDistance() {
@@ -96,7 +112,8 @@ export default class {
   }
 
   start() {
-    if (!this.initialized) return;
+    if (!this.countdownToDate) return;
+    this.running = true;
     this.interval();
 
     this.timer = setInterval(() => {
@@ -108,6 +125,7 @@ export default class {
 
   stop() {
     clearInterval(this.timer);
+    this.running = false;
     this.trigger('stopped');
   }
 

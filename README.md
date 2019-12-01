@@ -50,8 +50,9 @@ myCountdown.start();
 
 ### `new Endspurt(value, options)`
 
-#### `value`: required
+#### `value`
 Allowed formats:
+- `undefined`
 - `new Date()`
 - Timestamp as `Number`
 - Timestamp as `String`
@@ -68,7 +69,7 @@ Allowed formats:
   }
   ```
 
-#### `options`: optional
+#### `options`
 Defined as `Object`. [See options reference](#options)
 
 
@@ -77,6 +78,7 @@ Defined as `Object`. [See options reference](#options)
 ```js
 const myCountdown = new Endspurt(value, options);
 
+myCountdown.setEndDate(Date);      // set new end-date, see valid value formats above
 myCountdown.setOptions(Object);    // override options
 myCountdown.start();               // start countdown interval
 myCountdown.stop();                // stop countdown interval
