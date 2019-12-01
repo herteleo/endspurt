@@ -6,7 +6,7 @@ export default class {
     this.initialized = false;
     this.running = false;
 
-    this.countdownToDate = undefined;
+    this.endDate = undefined;
 
     this.distance = {
       years: { value: null, padded: null, raw: null },
@@ -67,7 +67,7 @@ export default class {
 
   setEndDate(value) {
     try {
-      this.countdownToDate = convertValueToDate(value);
+      this.endDate = convertValueToDate(value);
 
       if (this.running) this.interval();
 
@@ -77,7 +77,7 @@ export default class {
     } catch (error) {
       if (this.running) this.stop();
 
-      this.countdownToDate = undefined;
+      this.endDate = undefined;
       // eslint-disable-next-line no-console
       console.error(error);
     }
@@ -85,7 +85,7 @@ export default class {
 
   calculateDistance() {
     const actualDate = new Date();
-    let distanceInMs = new Date(this.countdownToDate - actualDate).getTime();
+    let distanceInMs = new Date(this.endDate - actualDate).getTime();
 
     if (this.options.timezoneOffset) {
       distanceInMs -= this.options.timezoneOffset;
@@ -117,7 +117,7 @@ export default class {
   }
 
   start() {
-    if (!this.countdownToDate || this.running) return;
+    if (!this.endDate || this.running) return;
     this.running = true;
     this.interval();
 
