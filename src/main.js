@@ -26,6 +26,7 @@ export default class {
       stopped: [],
       terminated: [],
       updated: [],
+      'updated-enddate': [],
     };
 
     this.setOptions(options);
@@ -69,6 +70,10 @@ export default class {
       this.countdownToDate = convertValueToDate(value);
 
       if (this.running) this.interval();
+
+      if (this.initialized) {
+        this.trigger('updated-enddate');
+      }
     } catch (error) {
       if (this.running) this.stop();
 

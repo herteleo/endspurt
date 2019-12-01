@@ -89,12 +89,13 @@ myCountdown.on(String, Function);  // register event callbacks
 ### Events
 
 ```js
-myCountdown.on('finished', Function);     // triggered when time is reached
-myCountdown.on('initialized', Function);  // triggered when Endspurt is ready
-myCountdown.on('started', Function);      // triggered when myCountdown.start() is called
-myCountdown.on('stopped', Function);      // triggered when myCountdown.stop() is called
-myCountdown.on('terminated', Function);   // triggered when time is reached and options.terminate is set to true
-myCountdown.on('updated', Function);      // triggered on every interval iteration
+myCountdown.on('finished', Function);        // triggered when time is reached
+myCountdown.on('initialized', Function);     // triggered when Endspurt is ready
+myCountdown.on('started', Function);         // triggered when myCountdown.start() is called
+myCountdown.on('stopped', Function);         // triggered when myCountdown.stop() is called
+myCountdown.on('terminated', Function);      // triggered when time is reached and options.terminate is set to true
+myCountdown.on('updated', Function);         // triggered on every interval iteration
+myCountdown.on('updated-enddate', Function); // triggered when myCountdown.setEndDate() is called
 ```
 
 Every event gets the `distance` object as first parameter.
