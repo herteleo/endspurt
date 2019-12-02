@@ -7,6 +7,9 @@
 ![](https://github.com/herteleo/endspurt/workflows/Lint/badge.svg)
 
 
+**⚠ Warning: Endspurt is still under development. There can still be breaking changes in 0.x.x-Verions. See the release notes for more information.**
+
+
 ## Installation
 
 **Via a CDN**
@@ -50,8 +53,9 @@ myCountdown.start();
 
 ### `new Endspurt(value, options)`
 
-#### `value`: required
+#### `value`
 Allowed formats:
+- `undefined`
 - `new Date()`
 - Timestamp as `Number`
 - Timestamp as `String`
@@ -68,7 +72,7 @@ Allowed formats:
   }
   ```
 
-#### `options`: optional
+#### `options`
 Defined as `Object`. [See options reference](#options)
 
 
@@ -77,6 +81,7 @@ Defined as `Object`. [See options reference](#options)
 ```js
 const myCountdown = new Endspurt(value, options);
 
+myCountdown.setEndDate(Date);      // set new end-date, see valid value formats above
 myCountdown.setOptions(Object);    // override options
 myCountdown.start();               // start countdown interval
 myCountdown.stop();                // stop countdown interval
@@ -87,12 +92,12 @@ myCountdown.on(String, Function);  // register event callbacks
 ### Events
 
 ```js
-myCountdown.on('finished', Function);     // triggered when time is reached
-myCountdown.on('initialized', Function);  // triggered when Endspurt is ready
-myCountdown.on('started', Function);      // triggered when myCountdown.start() is called
-myCountdown.on('stopped', Function);      // triggered when myCountdown.stop() is called
-myCountdown.on('terminated', Function);   // triggered when time is reached and options.terminate is set to true
-myCountdown.on('updated', Function);      // triggered on every interval iteration
+myCountdown.on('finished', Function);        // triggered when time is reached
+myCountdown.on('started', Function);         // triggered when myCountdown.start() is called
+myCountdown.on('stopped', Function);         // triggered when myCountdown.stop() is called
+myCountdown.on('terminated', Function);      // triggered when time is reached and options.terminate is set to true
+myCountdown.on('updated', Function);         // triggered on every interval iteration
+myCountdown.on('updated-enddate', Function); // triggered when myCountdown.setEndDate() is called
 ```
 
 Every event gets the `distance` object as first parameter.

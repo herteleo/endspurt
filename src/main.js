@@ -3,6 +3,10 @@ import convertValueToDate from './utils/convertValueToDate';
 
 export default class {
   constructor(value, options = {}) {
+    this.running = false;
+
+    this.endDate = undefined;
+
     this.distance = {
       years: { value: null, padded: null, raw: null },
       months: { value: null, padded: null, raw: null },
@@ -16,23 +20,17 @@ export default class {
 
     this.events = {
       finished: [],
-      initialized: [],
       started: [],
       stopped: [],
       terminated: [],
       updated: [],
+      'updated-enddate': [],
     };
 
     this.setOptions(options);
 
-    try {
-      this.countdownToDate = convertValueToDate(value);
-      this.initialized = true;
-      this.trigger('initialized');
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(error);
-      this.initialized = false;
+    if (value) {
+      this.setEndDate(value);
     }
   }
 
@@ -62,9 +60,24 @@ export default class {
     };
   }
 
+  setEndDate(value) {
+    try {
+      this.endDate = convertValueToDate(value);
+
+      if (this.running) this.interval();
+      this.trigger('updated-enddate');
+    } catch (error) {
+      if (this.running) this.stop();
+
+      this.endDate = undefined;
+      // eslint-disable-next-line no-console
+      console.error(error);
+    }
+  }
+
   calculateDistance() {
     const actualDate = new Date();
-    let distanceInMs = new Date(this.countdownToDate - actualDate).getTime();
+    let distanceInMs = new Date(this.endDate - actualDate).getTime();
 
     if (this.options.timezoneOffset) {
       distanceInMs -= this.options.timezoneOffset;
@@ -96,8 +109,11 @@ export default class {
   }
 
   start() {
-    if (!this.initialized) return;
+    if (!this.endDate || this.running) return;
+    this.running = true;
     this.interval();
+
+    if (!this.running) return;
 
     this.timer = setInterval(() => {
       this.interval();
@@ -108,6 +124,7 @@ export default class {
 
   stop() {
     clearInterval(this.timer);
+    this.running = false;
     this.trigger('stopped');
   }
 
