@@ -93,7 +93,6 @@ myCountdown.on(String, Function);  // register event callbacks
 
 ```js
 myCountdown.on('finished', Function);        // triggered when time is reached
-myCountdown.on('initialized', Function);     // triggered when Endspurt is ready
 myCountdown.on('started', Function);         // triggered when myCountdown.start() is called
 myCountdown.on('stopped', Function);         // triggered when myCountdown.stop() is called
 myCountdown.on('terminated', Function);      // triggered when time is reached and options.terminate is set to true

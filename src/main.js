@@ -3,7 +3,6 @@ import convertValueToDate from './utils/convertValueToDate';
 
 export default class {
   constructor(value, options = {}) {
-    this.initialized = false;
     this.running = false;
 
     this.endDate = undefined;
@@ -21,7 +20,6 @@ export default class {
 
     this.events = {
       finished: [],
-      initialized: [],
       started: [],
       stopped: [],
       terminated: [],
@@ -34,9 +32,6 @@ export default class {
     if (value) {
       this.setEndDate(value);
     }
-
-    this.initialized = true;
-    this.trigger('initialized');
   }
 
   static get version() {
@@ -70,10 +65,7 @@ export default class {
       this.endDate = convertValueToDate(value);
 
       if (this.running) this.interval();
-
-      if (this.initialized) {
-        this.trigger('updated-enddate');
-      }
+      this.trigger('updated-enddate');
     } catch (error) {
       if (this.running) this.stop();
 
