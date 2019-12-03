@@ -30,7 +30,9 @@
   "jsdelivr": "dist/endspurt.umd.min.js",
   "scripts": {
     "prepublishOnly": "npm run build",
-    "lint": "eslint . --ext .html,.js",
+    "lint:css": "stylelint **/*.{html,*css} --allow-empty-input",
+    "lint:js": "eslint . --ext .html,.js",
+    "lint": "npm run lint:css && npm run lint:js",
     "build": "rollup --config .rolluprc.js",
     "serve": "rollup --config .rolluprc.js --watch"
   },
@@ -41,6 +43,14 @@
     }
   },
   "lint-staged": {
+    "*.*css": [
+      "stylelint --fix",
+      "git add"
+    ],
+    "*.html": [
+      "stylelint -s html --fix",
+      "git add"
+    ],
     "*.{html,js}": [
       "eslint --fix",
       "git add"
@@ -67,6 +77,9 @@
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-uglify": "^6.0.3",
-    "semantic-release": "^15.13.31"
+    "semantic-release": "^15.13.31",
+    "stylelint": "^12.0.0",
+    "stylelint-config-recess-order": "^2.0.3",
+    "stylelint-config-standard": "^19.0.0"
   }
 }
