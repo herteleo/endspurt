@@ -1,0 +1,151 @@
+.endspurt {
+  display: inline-grid;
+  gap: 1rem;
+  grid-template-areas:
+    "years months months  weeks   weeks       "
+    "years days   days    days    milliseconds"
+    "hours hours  minutes minutes milliseconds"
+    "hours hours  seconds seconds milliseconds"
+    "until until  until   until   until       ";
+  grid-template-rows: 1fr 1fr repeat(3, min-content);
+  grid-template-columns: 3rem repeat(3, 1fr) 3rem;
+}
+
+.endspurt__item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+  font-family: 'Fira Code', monospace;
+  line-height: 1;
+  color: hsl(200 50% 70%);
+  text-transform: uppercase;
+  background-color: #175e82;
+  background-image: linear-gradient(120deg, hsl(200 60% 32%) 0%, hsl(200 70% 30%) 100%);
+  border-radius: 2px;
+  box-shadow: 0 0.125rem 0.25rem #0005;
+}
+
+.endspurt__item--years {
+  grid-area: years;
+}
+
+.endspurt__item--years .endspurt__item-body {
+  position: absolute;
+  align-self: center;
+  letter-spacing: 0.125rem;
+  white-space: nowrap;
+  transform: rotate(-90deg);
+  transform-origin: center center;
+}
+
+.endspurt__item--months {
+  grid-area: months;
+}
+
+.endspurt__item--months .endspurt__item-value {
+  font-size: 2rem;
+}
+
+.endspurt__item--months .endspurt__item-label {
+  margin-top: 0.25rem;
+}
+
+.endspurt__item--months .endspurt__item-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.endspurt__item--weeks {
+  grid-area: weeks;
+}
+
+.endspurt__item--weeks .endspurt__item-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.endspurt__item--weeks .endspurt__item-value {
+  font-size: 2rem;
+}
+
+.endspurt__item--weeks .endspurt__item-label {
+  margin-top: 0.25rem;
+}
+
+.endspurt__item--days {
+  grid-area: days;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.endspurt__item--hours {
+  grid-area: hours;
+}
+
+.endspurt__item--hours .endspurt__item-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+}
+
+.endspurt__item--hours .endspurt__item-value {
+  font-size: 3rem;
+}
+
+.endspurt__item--hours .endspurt__item-label {
+  margin-top: 0.5rem;
+}
+
+.endspurt__item--minutes {
+  grid-area: minutes;
+}
+
+.endspurt__item--minutes .endspurt__item-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.endspurt__item--minutes .endspurt__item-value {
+  font-size: 2rem;
+}
+
+.endspurt__item--minutes .endspurt__item-label {
+  margin-top: 0.25rem;
+}
+
+.endspurt__item--seconds {
+  grid-area: seconds;
+}
+
+.endspurt__item--milliseconds {
+  grid-area: milliseconds;
+}
+
+.endspurt__item--milliseconds .endspurt__item-body {
+  position: absolute;
+  align-self: center;
+  letter-spacing: 0.125rem;
+  white-space: nowrap;
+  transform: rotate(-90deg);
+  transform-origin: center center;
+}
+
+.endspurt__item--until {
+  grid-area: until;
+  min-width: 3rem;
+}
+
+.endspurt__item--until .endspurt__item-body {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.endspurt__item--until .endspurt__item-value {
+  display: flex;
+  flex-direction: column-reverse;
+  margin-top: 0.5rem;
+  text-transform: none;
+}
