@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Endspurt.js</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Code|Patua+One&display=swap">
+  <link rel="stylesheet" href="css/elements.scaffold.css">
+  <link rel="stylesheet" href="css/component.endspurt.css">
+  <link rel="stylesheet" href="css/component.form.css">
+  <link rel="stylesheet" href="css/component.request-notifications.css">
+</head>
+<body>
+
+  <main>
+    <section>
+      <h1><a href="//github.com/herteleo/endspurt">Endspurt.js</a></h1>
+    </section>
+    <section>
+      <div class="endspurt"></div>
+    </section>
+    <section>
+      <form action="/" id="createNewEndspurt" class="form">
+        <input class="form__item form__input input" type="datetime-local" id="newEndspurtValue" required>
+        <button class="form__item form__btn btn" type="submit">New Endspurt</button>
+      </form>
+      <button class="request-notifications btn">
+        Enable notifications
+      </button>
+    </section>
+  </main>
+
+  <script type="module">
+    /* eslint-env browser */
+    /* eslint-disable import/extensions, import/no-unresolved */
+
+    // import Endspurt from '../dist/endspurt.esm.js';
+    import Endspurt from 'https://unpkg.com/endspurt/dist/endspurt.esm.js';
+    import party from './js/party.js';
+    import requestNotifications from './js/requestNotifications.js';
+
+    requestNotifications();
+
+    // parse the current endDate as string and print it to the 'until' item
+    const printEndDate = (endDate) => {
+      const endDateString = endDate.toLocaleDateString('en', {
+        weekday: 'short',
+        year: 'numeric',
+        month: 'short',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      });
+
+      document.querySelector('[data-until]').innerText = endDateString;
+    };
+
+    // generates the endspurt items html elements dynamically
+    const printEndspurtItems = (instance) => {
+      const units = Array.from(instance.options.include);
+      units.push('until');
+
+      const endspurtItems = units.reduce((items, item) => `
+        ${items}
+        <div class="endspurt__item endspurt__item--${item}">
+          <div class="endspurt__item-body">
+            <span class="endspurt__item-value" data-${item}></span>
+            <span class="endspurt__item-label">${item}</span>
+          </div>
+        </div>
+      `, '');
+
+      document.querySelector('.endspurt').innerHTML = endspurtItems;
+    };
+
+    // initialize a new endspurt instance
+    const endspurt = new Endspurt();
+
+    // generate the items html
+    printEndspurtItems(endspurt);
+
+    // dynamically print the current countdown values to the endspurt items html
+    endspurt.on('updated', (distance) => {
+      Object.entries(distance).forEach(([prop, val]) => {
+        document.querySelector(`[data-${prop}]`).innerText = val.padded;
+      });
+    });
+
+    // print the current/updated 'until' date-string to the html
+    endspurt.on('updated-enddate', function updatedEndDate() {
+      printEndDate(this.endDate);
+    });
+
+    // show animation and notification when endDate is reached
+    endspurt.on('finished', party);
+
+    // use a custom endDate from url hash or a default value as endDate
+    const customEndDate = window.location.href.split('#')[1];
+    const defaultEndDate = new Date().getTime() + 7.884e+9;
+    const endDate = new Date(customEndDate || defaultEndDate);
+
+    // set the endDate, triggers .on('updated-enddate')
+    endspurt.setEndDate(endDate);
+
+    // start the countdown
+    endspurt.start();
+
+    // prepare the endDate for 'datetime-local'-inputs and set it as value
+    let endDateForInput = endDate.getTime() - (endDate.getTimezoneOffset() * 60000);
+    endDateForInput = new Date(endDateForInput).toISOString().slice(0, 16);
+    document.getElementById('newEndspurtValue').value = endDateForInput;
+
+    // sets a custom endDate if user submits 'New Endspurt' form
+    document.getElementById('createNewEndspurt').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const { value } = document.getElementById('newEndspurtValue');
+      document.location.hash = value;
+
+      endspurt.setEndDate(value);
+
+      // restarts endspurt if countdown has already finished
+      endspurt.start();
+    });
+  </script>
+</body>
+</html>
