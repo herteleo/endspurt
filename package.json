@@ -76,7 +76,7 @@
     "rollup": "^1.27.4",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-uglify": "^6.0.3",
+    "rollup-plugin-uglify": "^6.0.4",
     "semantic-release": "^15.13.31",
     "stylelint": "^12.0.0",
     "stylelint-config-recess-order": "^2.0.3",
