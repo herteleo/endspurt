@@ -36,11 +36,9 @@
     "build": "rollup --config .rolluprc.js",
     "serve": "rollup --config .rolluprc.js --watch"
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
-    }
+  "gitHooks": {
+    "commit-msg": "commitlint -e",
+    "pre-commit": "lint-staged"
   },
   "lint-staged": {
     "*.*css": [
@@ -70,13 +68,13 @@
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-html": "^6.1.2",
     "eslint-plugin-import": "^2.22.1",
-    "husky": "^3.1.0",
     "lint-staged": "^9.4.3",
     "rollup": "^2.54.0",
     "rollup-plugin-terser": "^7.0.2",
     "semantic-release": "^17.4.4",
     "stylelint": "^13.13.1",
     "stylelint-config-recess-order": "^2.4.0",
-    "stylelint-config-standard": "^22.0.0"
+    "stylelint-config-standard": "^22.0.0",
+    "yorkie": "^2.0.0"
   }
 }
