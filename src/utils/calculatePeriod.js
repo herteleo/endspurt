@@ -1,6 +1,6 @@
 import inMs from './inMs';
 
-export default function (propPlural, distanceInMs) {
+export default function calculatePeriod(propPlural, distanceInMs) {
   const propSingular = propPlural.slice(0, -1);
 
   const periodInMs = Math.floor(distanceInMs / inMs[propSingular]);
