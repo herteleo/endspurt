@@ -1,9 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
-import babel from 'rollup-plugin-babel';
-import common from 'rollup-plugin-commonjs';
+import babel from '@rollup/plugin-babel';
+import common from '@rollup/plugin-commonjs';
 import replacePlugin from '@rollup/plugin-replace';
-import { uglify } from 'rollup-plugin-uglify';
+import { terser } from 'rollup-plugin-terser';
 
 import {
   author as pkgAuthor,
@@ -28,6 +28,7 @@ const banner = `/*!
 `;
 
 const babelConfig = {
+  babelHelpers: 'bundled',
   babelrc: false,
   exclude: 'node_modules/**',
   presets: [
@@ -42,8 +43,11 @@ const babelConfig = {
 };
 
 const replace = () => replacePlugin({
-  __PKG_NAME__: namePascalCased,
-  __PKG_VERSION__: pkgVersion,
+  preventAssignment: true,
+  values: {
+    __PKG_NAME__: namePascalCased,
+    __PKG_VERSION__: pkgVersion,
+  },
 });
 
 const input = () => ({
@@ -52,6 +56,7 @@ const input = () => ({
 
 const output = (suffix, format, globals) => ({
   output: {
+    exports: 'default',
     file: `dist/${nameWithoutScope}.${suffix}.js`,
     format,
     name: namePascalCased,
@@ -93,7 +98,7 @@ export default [
       replace(),
       common(),
       babel(babelConfig),
-      uglify({
+      terser({
         output: {
           comments: /^!/,
         },
