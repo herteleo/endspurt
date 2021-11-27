@@ -42,16 +42,13 @@
   },
   "lint-staged": {
     "*.*css": [
-      "stylelint --fix",
-      "git add"
+      "stylelint --fix"
     ],
     "*.html": [
-      "stylelint -s html --fix",
-      "git add"
+      "stylelint -s html --fix"
     ],
     "*.{html,js}": [
-      "eslint --fix",
-      "git add"
+      "eslint --fix"
     ]
   },
   "devDependencies": {
@@ -68,7 +65,7 @@
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-html": "^6.1.2",
     "eslint-plugin-import": "^2.22.1",
-    "lint-staged": "^9.4.3",
+    "lint-staged": "^12.1.2",
     "rollup": "^2.54.0",
     "rollup-plugin-terser": "^7.0.2",
     "semantic-release": "^17.4.4",
